@@ -35,7 +35,7 @@ CancerKbs::Application.configure do
     :port                 => 587,
     :domain               => 'gmail.com',
     :user_name            => 'banta.bernard@gmail.com',
-    :password             => 'Gkaribu82E',
+    :password             => '*******',
     :authentication       => :plain
   }
 
