@@ -1,0 +1,50 @@
+<% if user_signed_in? %><%= link_to 'Edit', edit_cancer_type_path(@cancer_type) %> |<% end %>
+<%= link_to 'Back', cancer_types_path %>
+<hr/>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name of the cancer:&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </b>
+  <%= @cancer_type.name %>
+</p>
+
+<p>
+  <b>Sex likely to affect:&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</b>
+  <%= @cancer_type.sex %>
+</p>
+
+<p>
+  <b>G. location likely to affect:</b>
+  <%= @cancer_type.location %>
+</p>
+
+<p>
+  <b>Description of the cancer:</b>
+  <%= @cancer_type.desc %>
+</p>
+
+<p>
+  <table>
+  <tr>
+    <th>Symptoms</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cs.each do |cs| %>
+  <tr>
+    <td><%= CancerSymptom.find(cs.cancer_symptoms_id).name %></td>
+    <td>=></td>
+    <td><%= CancerSymptom.find(cs.cancer_symptoms_id).desc %></td>
+    <td><% if user_signed_in? %><%= link_to 'Remove', :action => :remove_cs, :id => cs.id %><% end %></td>
+  </tr>
+<% end %>
+</table>
+</p>
+
+<% if user_signed_in? %><%= render 'adds' %><% end %>
+
+<hr/>
+<% if user_signed_in? %><%= link_to 'Edit', edit_cancer_type_path(@cancer_type) %> |<% end %>
+<%= link_to 'Back', cancer_types_path %>

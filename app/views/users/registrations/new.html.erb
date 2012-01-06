@@ -1,0 +1,65 @@
+<% content_for :nav do %>
+  <ul id="main-nav">
+    <li>
+      <%= link_to('Dashboard', transactions_path) %>
+    </li>
+    <li>
+      <%= link_to( I18n.t('nav.campaigns'), campaigns_path, :class => "current" )%>
+    </li>
+    <li>
+        <%= link_to I18n.t('nav.analytics'), '/analytics' %>
+     </li>
+    <li>
+      <a href="/accounts" style="width: 32px; background: url('/images/main-nav_bg2_32.png'); );">
+      <%= image_tag("icons/run28.png", :size => "28x28", :alt => "Settings") %>
+      </a>
+      <%#= link_to('Settings', accounts_path) %>
+    </li>
+    <li>
+        <a href="/help" style="width: 32px; background: url('/images/main-nav_bg2_32.png'); margin-left: 1px;">
+      <%= image_tag("icons/help_blue28.png", :size => "28x28", :alt => "Help") %>
+      </a>
+        <%#= link_to('Help', '/help') %>
+    </li>
+  </ul>
+<% end %>
+
+<div class="content-box">
+  <div class="content-box-header">
+    <h3>New User</h3>
+  </div>
+
+  <div class="content-box-content">
+    <% unless notice.blank? && alert.blank? %>
+        <%= content_tag(:div, flash[:error], :class => "flash_error") if flash[:error] %>
+        <%= content_tag(:div, flash[:notice], :class => "flash_notice") if flash[:notice] %>
+        <%= content_tag(:div, flash[:alert], :class => "flash_alert") if flash[:alert] %>
+    <% end %>
+    <%= form_for(@user, :action => 'create') do |f| %>
+      <%#= error_messages(@user,"Could not register user") %>
+      <table>
+        <tbody>
+          <%#= error_messages(@user,"Could not update user") %>
+          <%= render :partial => 'user_fields', :locals => { :f => f } %>
+          <tr>
+            <td><%= f.label :password %> </td>
+            <td><%= f.password_field :password %><i>(leave blank if you don't want to change it)</i></td>
+          </tr>
+          <tr>
+            <td><%= f.label :password_confirmation %></td>
+            <td><%= f.password_field :password_confirmation %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :current_password %> </td>
+            <td><%= f.password_field :current_password %><i>(we need your current password to confirm your changes)</i></td>
+          </tr>
+          <tr>
+
+            <td><br/><br/><%= f.submit "Add", :class => "submit-button"%><br/><br/></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div><!-- end .content-box-content -->
+
+</div><!-- end .content-box -->

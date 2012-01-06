@@ -1,0 +1,2 @@
+module CancerDiagnosisHelper
+end

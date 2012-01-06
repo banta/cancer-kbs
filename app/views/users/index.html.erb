@@ -1,0 +1,88 @@
+<% content_for :nav do %>
+  <ul id="main-nav">
+    <li>
+      <%= link_to('Dashboard', transactions_path) %>
+    </li>
+    <li>
+      <%= link_to( I18n.t('nav.campaigns'), campaigns_path, :class => "current" )%>
+    </li>
+    <li>
+        <%= link_to I18n.t('nav.analytics'), '/analytics' %>
+     </li>
+    <li>
+      <a href="/accounts" style="width: 32px; background: url('/images/main-nav_bg2_32.png'); );">
+      <%= image_tag("icons/run28.png", :size => "28x28", :alt => "Settings") %>
+      </a>
+      <%#= link_to('Settings', accounts_path) %>
+    </li>
+    <li>
+        <a href="/help" style="width: 32px; background: url('/images/main-nav_bg2_32.png'); margin-left: 1px;">
+      <%= image_tag("icons/help_blue28.png", :size => "28x28", :alt => "Help") %>
+      </a>
+        <%#= link_to('Help', '/help') %>
+    </li>
+  </ul>
+<% end %>
+<% unless notice.blank? && alert.blank? %>
+  <%= content_tag(:div, flash[:error], :class => "message_error") if flash[:error] %>
+  <%= content_tag(:div, flash[:notice], :class => "message_notice") if flash[:notice] %>
+  <%= content_tag(:div, flash[:alert], :class => "message_alert") if flash[:alert] %>
+<% end %>
+<div class="content-box">
+  <div class="content-box-header">
+    <h2>Users</h2>
+  </div>
+
+  <div class="content-box-content">
+
+      <table class="filter">
+      <thead>
+        <tr>
+            <th><%= I18n.t('user.name') %></th>
+            <th><%= I18n.t('user.email') %></th>
+            <th><%= I18n.t('user.role') %></th>
+            <th></th>
+            <th></th>
+          </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+        </td>
+        </tr>
+      </tfoot>
+
+
+    <tbody>
+      <% @users.each do |u| %>
+        <% if !(u.roles.collect{|r| r.name}).include?("Superadmin") %>
+          <tr>
+            <td><%= link_to_if(can?(:read, User), "#{u.first_name} #{u.last_name}", user_path(u.id)) {} %></td>
+            <td><%= "#{u.email}" %></td>
+            <td><%= "#{u.roles.collect{|r| r.name}}" %></td>
+            <td><%= link_to_if(can?(:edit, User), I18n.t('General.edit'), edit_user_path(u.id), :class => "submit-button") {} %></td>
+            <td><%#= link_to_if(can?(:delete, User), I18n.t('General.delete'), user_path(u), :confirm => "Are you sure?", :method => :delete ) {} %>
+              <%#= link_to 'Destroy', u, :confirm => 'Are you sure?', :method => :delete %>
+              <% if can?(:delete, User) %>
+                <%= form_for :user, :url => "/users/delete/#{u.id}", :html => {:onsubmit => 'return confirm("Are you sure?");'} do %>
+                  <input type="submit" value="Delete" class="delete-button"/>
+               <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+
+      <% end %>
+      <tr>
+        <td>
+          <br/></br />
+            <%= link_to I18n.t('user.new'), new_user_path, :class => "submit-button" %>
+        </td>
+      </tr>
+    </tbody>
+
+
+  </table>
+  </div><!-- end .content-box-content -->
+
+</div><!-- end .content-box -->

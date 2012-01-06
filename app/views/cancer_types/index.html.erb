@@ -1,0 +1,29 @@
+<h1>Listing Cancer Types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Sex</th>
+    <th>Location</th>
+    <th>Desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cancer_types.each do |cancer_type| %>
+  <tr>
+    <td><%= cancer_type.name %></td>
+    <td><%= cancer_type.sex %></td>
+    <td><%= cancer_type.location %></td>
+    <td><%= cancer_type.desc %></td>
+    <td><%= link_to 'Show', cancer_type %></td>
+    <td><% if user_signed_in? %><%= link_to 'Edit', edit_cancer_type_path(cancer_type) %><% end %></td>
+    <td><% if user_signed_in? %><%= link_to 'Destroy', cancer_type, confirm: 'Are you sure?', method: :delete %><% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if user_signed_in? %><%= link_to 'New Cancer type', new_cancer_type_path %><% end %>

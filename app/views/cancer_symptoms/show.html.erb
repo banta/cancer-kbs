@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @cancer_symptom.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @cancer_symptom.desc %>
+</p>
+
+
+<% if user_signed_in? %><%= link_to 'Edit', edit_cancer_symptom_path(@cancer_symptom) %> |<% end %>
+<%= link_to 'Back', cancer_symptoms_path %>

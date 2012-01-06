@@ -1,0 +1,15 @@
+<h1>CancerDiagnosis Results</h1>
+<% if @answer[0][1] == 0.0 %>
+  <p>
+    No type of cancer found for the given symptoms.
+  </p>
+<% else %>
+  <p>
+    According to the symptoms you have given there is <b style="color: #BA303A;" ><%= @answer[0][1] %>&#37</b> chances that
+    the patient is suffering from <b style="color: #BA303A;" ><%= CancerType.find(@answer[0][0]).name %></b> cancer.
+  </p>
+
+  <p>
+    Click <%= link_to 'here', cancer_diagnosis_full_report_path %> for full report.
+  </p>
+<%  end %>

@@ -1,0 +1,11 @@
+<div id="menu">
+  <p class="menu">
+    <%# if user_signed_in? %>
+      <%= link_to "Home", root_path %> &nbsp; &nbsp;
+      <%= link_to "Types of Cancer", cancer_types_path %> &nbsp; &nbsp;
+      <%= link_to "Cancer Diagnosis", cancer_diagnosis_diagnose_path %> &nbsp; &nbsp;
+      <%= link_to "Cancer Symptoms", cancer_symptoms_path %> &nbsp; &nbsp;
+    <%# end -%>
+    &nbsp;
+  </p>
+</div>

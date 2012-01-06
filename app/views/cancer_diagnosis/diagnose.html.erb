@@ -1,0 +1,36 @@
+<h1>Select symptoms</h1>
+<%= form_tag('/cancer_diagnosis/results') do %>
+  <p>
+    <label>Symptom1:</label>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom1", options_for_select(["None"]+symptoms), :v => params[:symptom1] ) %>
+  </p>
+
+  <p>
+    <label>Symptom2:</label>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom2", options_for_select(["None"]+symptoms), :v => params[:symptom2] ) %>
+  </p>
+
+  <p>
+    <label>Symptom3:</label>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom3", options_for_select(["None"]+symptoms), :v => params[:symptom3] ) %>
+  </p>
+
+  <p>
+    <label>Symptom4:</label>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom4", options_for_select(["None"]+symptoms), :v => params[:symptom4] ) %>
+  </p>
+
+  <p>
+    <label>Symptom5:</label>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom5", options_for_select(["None"]+symptoms), :v => params[:symptom5] ) %>
+  </p>
+
+  <p>
+    <%= submit_tag "Submit", :class => "submit" %>
+  </p>
+<% end %>

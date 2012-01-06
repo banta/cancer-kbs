@@ -1,0 +1,47 @@
+<h1>Full report of the diagnosis</h1>
+<p>
+<table>
+  <tr>
+    <th>Cancer</th>
+    <th></th>
+    <th>%</th>
+  </tr>
+
+  <% @answer.each do |a| %>
+    <tr>
+      <td><%= CancerType.find(a[0]).name %></td>
+      <td>&nbsp; &nbsp;</td>
+      <td><%= a[1] %>&#37</td>
+    </tr>
+  <% end %>
+</table>
+</p>
+
+
+<h1>Tabled Report</h1>
+<p>
+<table border="1" >
+  <tr style=" color: #BA303A;">
+    <th>Cancer name</th>
+    <th>Symptom 1</th>
+    <th>Symptom 2</th>
+    <th>Symptom 3</th>
+    <th>Symptom 4</th>
+    <th>Symptom 5</th>
+  </tr>
+
+  <% @full_report.each do |a| %>
+    <tr>
+      <td><%= CancerType.find(a[0]).name %></td>
+      <% a[1].each do |c| %>
+        <td><%= CancerSymptom.find(c).name %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</p>
+
+<td>&nbsp; &nbsp;</td>
+<td><%#= CancerSymptom.find(a[1]).name %></td>
+<td>&nbsp; &nbsp;</td>
+<td><%#= CancerSymptom.find(a[2]).name.nil? %></td>

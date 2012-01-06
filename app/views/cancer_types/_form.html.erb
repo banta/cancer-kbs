@@ -1,0 +1,33 @@
+<%= form_for(@cancer_type) do |f| %>
+  <% if @cancer_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cancer_type.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @cancer_type.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :sex %><br />
+    <%= f.text_field :sex %>
+  </p>
+  <p>
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </p>
+  <p>
+    <%= f.label :desc %><br />
+    <%= f.text_area :desc %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,8 @@
+<%= form_tag :controller => 'cancer_types', :action => 'create_cs', :method => 'post' do %>
+  <p>
+    <%symptoms = CancerSymptom.all.map{|c| [c.name, c.id] }%>
+    <%= select_tag("symptom", options_for_select(symptoms), :v => params[:symptom] ) %>
+    <%= hidden_field_tag "cst", @cancer_type.id, :v => params[:cst] %>
+    <%= submit_tag "Add cancer symptom" %>
+  </p>
+<% end %>

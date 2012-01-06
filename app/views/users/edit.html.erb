@@ -1,0 +1,76 @@
+<% content_for :nav do %>
+  <ul id="main-nav">
+    <li>
+      <%= link_to('Dashboard', transactions_path) %>
+    </li>
+    <li>
+      <%= link_to( I18n.t('nav.campaigns'), campaigns_path, :class => "current" )%>
+    </li>
+    <li>
+        <%= link_to I18n.t('nav.analytics'), '/analytics' %>
+     </li>
+    <li>
+     <div class="menu">
+        <ul class="sf-menu">
+          <li style="background: none; background-color: transparent; border: none;">
+            <a href="/accounts" style="width: 32px; border: none; padding: 0 0; background: url('/images/main-nav_bg2_32.png'); );">
+               <%= image_tag("icons/run28.png", :size => "28x28", :alt => "Settings") %>
+            </a>
+              <ul>
+                  <li><%= link_to I18n.t('General.mm_accounts'), accounts_path %></li>
+                  <li><%= link_to I18n.t('Company.company_settings'), edit_company_account_configuration_path(current_user.company) %></li>
+                  <li><%= link_to I18n.t('user.users'), users_path %></li>
+                  <li><%= link_to I18n.t('user.profile'), edit_user_path(current_user.id) %></li>
+              </ul>
+          </li>
+        </ul>
+     </div>
+    </li>
+    <li>
+        <a href="/help" style="width: 32px; background: url('/images/main-nav_bg2_32.png'); margin-left: 1px;">
+      <%= image_tag("icons/help_blue28.png", :size => "28x28", :alt => "Help") %>
+      </a>
+        <%#= link_to('Help', '/help') %>
+    </li>
+  </ul>
+<% end %>
+
+ <% unless notice.blank? && alert.blank? %>
+    <%= content_tag(:div, flash[:error], :class => "message_error") if flash[:error] %>
+    <%= content_tag(:div, flash[:notice], :class => "message_notice") if flash[:notice] %>
+    <%= content_tag(:div, flash[:alert], :class => "message_alert") if flash[:alert] %>
+ <% end %>
+<div class="content-box">
+  <div class="content-box-header">
+    <h3><%= @user == @current_user ? "Edit Your Settings" : "Edit User Settings" %></h3>
+  </div>
+
+  <div class="content-box-content">
+
+    <h3><%= @user == @current_user ? "Your Account Settings" : "Edit User: #{@user.first_name} #{@user.last_name}" %></h3>
+
+
+      <table>
+        <tbody>
+          <%= form_for(@user, :html => { :method => :put }) do |f| %>
+          <%#= error_messages(@user,"Could not update user") %>
+          <%= render :partial => 'user_fields', :locals => { :f => f } %>
+          <tr>
+            <td><%= f.label :password %> </td>
+            <td><%= f.password_field :password, :autocomplete => "off" %><i>(leave blank if you don't want to change it)</i></td>
+          </tr>
+          <tr>
+            <td><%= f.label :password_confirmation %></td>
+            <td><%= f.password_field :password_confirmation, :autocomplete => "off" %></td>
+          </tr>
+          <tr>
+            <td><br/><br/><%= f.submit "Update", :class => "submit-button"%><br/><br/></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <%= link_to "Back", :back %>
+  </div><!-- end .content-box-content -->
+
+</div><!-- end .content-box -->
